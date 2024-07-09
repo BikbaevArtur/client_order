@@ -1,7 +1,6 @@
 package ru.bikbaev.client_order.model.dto.dtoAdminPanel;
 
 import lombok.Data;
-import ru.bikbaev.client_order.model.entity.Category;
 
 import java.math.BigDecimal;
 @Data
