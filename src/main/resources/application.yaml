@@ -1,0 +1,13 @@
+spring:
+  application:
+    name:
+      client_order
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/client_order
+    username: artur
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
