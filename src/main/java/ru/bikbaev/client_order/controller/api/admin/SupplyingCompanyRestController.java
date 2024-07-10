@@ -9,7 +9,7 @@ import ru.bikbaev.client_order.service.admin.SupplyingCompanyService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/supplying-company")
+@RequestMapping("/api/supplying-company")
 public class SupplyingCompanyRestController {
     public final SupplyingCompanyService supplyingCompanyService;
 
@@ -25,13 +25,13 @@ public class SupplyingCompanyRestController {
     }
 
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<SupplyingCompany>> findAll(){
         return new ResponseEntity<>(supplyingCompanyService.findAll(),HttpStatus.OK);
     }
 
 
-    @PostMapping("/creat")
+    @PostMapping()
     public ResponseEntity<SupplyingCompany> creatSupplyingCompany(@RequestBody SupplyingCompany supplyingCompany){
         return new ResponseEntity<>(supplyingCompanyService.creatNewCompany(supplyingCompany),HttpStatus.CREATED);
     }

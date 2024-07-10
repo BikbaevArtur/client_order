@@ -9,7 +9,7 @@ import ru.bikbaev.client_order.service.admin.ProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 public class ProductController {
     private final ProductService productService;
 
@@ -23,12 +23,12 @@ public class ProductController {
         return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<ProductDTO>> findAll() {
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/creat")
+    @PostMapping()
     public ResponseEntity<ProductDTO> creatNewProduct(@RequestBody ProductDTO productDTO) {
         return new ResponseEntity<>(productService.creatNewProduct(productDTO), HttpStatus.CREATED);
     }

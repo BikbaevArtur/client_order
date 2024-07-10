@@ -2,8 +2,9 @@ package ru.bikbaev.client_order.service.admin;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SaleOrderDTO;
 import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
+import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.InvoiceForConfirmationOrderDTO;
+import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.SaleOrderDTO;
 import ru.bikbaev.client_order.model.entity.*;
 import ru.bikbaev.client_order.model.entity.compositeKey.OrderProductId;
 import ru.bikbaev.client_order.repository.requestRepository.*;
@@ -60,6 +61,72 @@ public class SaleOrderService {
     }
 
 
+
+    /**
+     * Updates the status and check link of a sale order based on the provided invoice details.
+     *
+     * @param invoice The InvoiceForConfirmationOrderDTO containing the sale order ID, new status ID, and check link.
+     * @return The updated SaleOrderDTO representing the sale order with the new status and check link.
+     * @throws RuntimeException if the sale order or status is not found.
+     */
+    public SaleOrderDTO invoiceForConfirmationOrder(InvoiceForConfirmationOrderDTO invoice) {
+
+        SaleOrder saleOrder = saleOrderRequest.findById(invoice.getSaleOrderId()).orElseThrow(
+                () -> new RuntimeException("order not found"));
+
+        System.out.println(invoice.getStatusOrderId());
+        StatusOrder statusOrder = statusOrderRequest.findById(invoice.getStatusOrderId()).orElseThrow(
+                () -> new RuntimeException("status not found"));
+
+
+        saleOrder.setStatusOrder(statusOrder);
+        saleOrder.setCheckLink(invoice.getCheckLink());
+
+        saleOrderRequest.creatNewSaleOrder(saleOrder);
+
+        return saleOrderConvertToDTO(saleOrder,getOrderProductDTOS(saleOrder.getOrderProducts()));
+
+    }
+
+
+    /**
+     * Updates the status of a sale order and adjusts the product stock balance if necessary.
+     *
+     * @param saleOrderId   The ID of the sale order to be updated.
+     * @param statusOrderId The ID of the new status to be set for the sale order.
+     * @return The updated SaleOrderDTO representing the sale order with the new status.
+     * @throws RuntimeException if the sale order or status is not found.
+     */
+    @Transactional
+    public SaleOrderDTO updateOrderStatus(int saleOrderId, int statusOrderId) {
+        SaleOrder saleOrder = saleOrderRequest.findById(saleOrderId).orElseThrow(
+                () -> new RuntimeException("order not found"));
+        StatusOrder statusOrder = statusOrderRequest.findById(statusOrderId).orElseThrow(
+                () -> new RuntimeException("status not found"));
+
+        if (statusOrderId == 3 || saleOrderId == 4) {
+            List<OrderProduct> orderProducts = saleOrder.getOrderProducts();
+            for (OrderProduct orderProduct : orderProducts) {
+                Product product = orderProduct.getProduct();
+                int quantityProduct = product.getStockBalance() - orderProduct.getQuantity();
+                product.setStockBalance(quantityProduct);
+                productRequest.creatNewProduct(product);
+            }
+        }
+
+        saleOrder.setStatusOrder(statusOrder);
+        saleOrderRequest.creatNewSaleOrder(saleOrder);
+        return saleOrderConvertToDTO(saleOrder, getOrderProductDTOS(saleOrder.getOrderProducts()));
+    }
+
+
+    /**
+     * Finds a sale order by its ID and converts it to a SaleOrderDTO.
+     *
+     * @param id The unique identifier of the sale order to be found.
+     * @return A SaleOrderDTO representing the sale order, including its associated products.
+     * @throws RuntimeException if the sale order is not found.
+     */
     public SaleOrderDTO findOrderById(int id) {
 
         SaleOrder saleOrder = saleOrderRequest.findById(id).orElseThrow(
@@ -72,19 +139,24 @@ public class SaleOrderService {
 
 
     /**
-     * TODO после заполнение статусов заявок , изменить логику изменения кол - во продукта
-     * @param id
+     * Deletes a sale order and its associated order products. If the status of the sale order
+     * is either 3(заявка подтверждена) or 4(отгружено), it updates the stock balance of the related products before deleting
+     * the order products and the sale order.
+     *
+     * @param id The unique identifier of the sale order to be deleted.
+     * @throws RuntimeException if the sale order is not found.
      */
 
+    @Transactional
     public void deleteSaleOrder(int id) {
         SaleOrder saleOrder = saleOrderRequest.findById(id).orElseThrow(
                 () -> new RuntimeException("order not found"));
 
         List<OrderProduct> orderProducts = orderProductRequest.findByOrderProductId_SaleOrderId(id);
 
-        for (OrderProduct orderProduct: orderProducts){
+        for (OrderProduct orderProduct : orderProducts) {
 
-            if(saleOrder.getStatusOrder().getId() == 4){
+            if (saleOrder.getStatusOrder().getId() == 3 || saleOrder.getStatusOrder().getId() == 4) {
                 Product product = orderProduct.getProduct();
 
                 int quantity = product.getStockBalance() + orderProduct.getQuantity();
@@ -97,6 +169,31 @@ public class SaleOrderService {
         }
 
         saleOrderRequest.deleteSaleOrder(saleOrder);
+
+    }
+
+
+    /**
+     * Retrieves all sale orders and converts them to a list of SaleOrderDTOs.
+     *
+     * @return A list of SaleOrderDTOs representing all sale orders and their associated products.
+     */
+
+    public List<SaleOrderDTO> findAllOrder() {
+
+        List<SaleOrder> allSaleOrders = saleOrderRequest.getAll();
+
+        List<SaleOrderDTO> saleOrderDTOS = new ArrayList<>();
+
+        for (SaleOrder saleOrder : allSaleOrders) {
+            List<SupplyingAndOrderProductDTO> orderProductDTOS = getOrderProductDTOS(saleOrder.getOrderProducts());
+            SaleOrderDTO saleOrderDTO = saleOrderConvertToDTO(saleOrder, orderProductDTOS);
+
+            saleOrderDTOS.add(saleOrderDTO);
+
+        }
+
+        return saleOrderDTOS;
 
     }
 
@@ -208,6 +305,15 @@ public class SaleOrderService {
 
     }
 
+
+    /**
+     * Converts a list of OrderProduct entities to a list of SupplyingAndOrderProductDTOs.
+     * This method iterates through each OrderProduct and creates a corresponding
+     * SupplyingAndOrderProductDTO with the product ID and quantity.
+     *
+     * @param orderProducts The list of OrderProduct entities to be converted.
+     * @return A list of SupplyingAndOrderProductDTOs.
+     */
 
     private List<SupplyingAndOrderProductDTO> getOrderProductDTOS(List<OrderProduct> orderProducts) {
 

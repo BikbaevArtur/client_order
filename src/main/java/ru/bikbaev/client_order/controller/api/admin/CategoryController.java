@@ -9,7 +9,7 @@ import ru.bikbaev.client_order.service.admin.CategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 public class CategoryController {
     private final CategoryService categoryService;
 
@@ -23,12 +23,12 @@ public class CategoryController {
     }
 
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<List<Category>> findAll(){
         return new ResponseEntity<>(categoryService.findAll(),HttpStatus.OK);
     }
 
-    @PostMapping("/creat")
+    @PostMapping()
     public ResponseEntity<Category>  creatCategory(@RequestBody Category category){
 
         return new ResponseEntity<>(categoryService.creatNewCategory(category),HttpStatus.CREATED);

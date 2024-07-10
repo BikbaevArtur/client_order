@@ -3,8 +3,10 @@ package ru.bikbaev.client_order.controller.api.admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.OrderRequestDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SaleOrderDTO;
+import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.InvoiceForConfirmationOrderDTO;
+import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.OrderRequestDTO;
+import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.SaleOrderDTO;
+import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.SaleOrderUpdateStatusDTO;
 import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
 import ru.bikbaev.client_order.model.entity.SaleOrder;
 import ru.bikbaev.client_order.service.admin.SaleOrderService;
@@ -12,13 +14,35 @@ import ru.bikbaev.client_order.service.admin.SaleOrderService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/api/order")
 public class OrderController {
 
     private final SaleOrderService service;
 
     public OrderController(SaleOrderService service) {
         this.service = service;
+    }
+
+
+    @GetMapping()
+    public ResponseEntity<List<SaleOrderDTO>> findAllOrder(){
+        return new ResponseEntity<>(service.findAllOrder(),HttpStatus.OK);
+    }
+
+    @PostMapping("/update-status")
+    public ResponseEntity<SaleOrderDTO> updateStatusOrder(@RequestBody SaleOrderUpdateStatusDTO saleOrderUpdateStatusDTO){
+
+        return new ResponseEntity<>(service.updateOrderStatus
+                (saleOrderUpdateStatusDTO.getSaleOrderId(),
+                saleOrderUpdateStatusDTO.getStatusOrderId()),
+                HttpStatus.OK);
+    }
+
+
+    @PostMapping("/invoice")
+
+    public ResponseEntity<SaleOrderDTO> addInvoiceOrder(@RequestBody InvoiceForConfirmationOrderDTO invoice){
+        return new ResponseEntity<>(service.invoiceForConfirmationOrder(invoice),HttpStatus.OK);
     }
 
 

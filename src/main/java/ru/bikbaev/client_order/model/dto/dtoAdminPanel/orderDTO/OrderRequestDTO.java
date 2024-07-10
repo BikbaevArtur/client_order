@@ -1,8 +1,9 @@
-package ru.bikbaev.client_order.model.dto.dtoAdminPanel;
+package ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
 
 import java.util.List;
 

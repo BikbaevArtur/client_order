@@ -13,7 +13,7 @@ import ru.bikbaev.client_order.service.admin.SupplyingService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/supplying")
+@RequestMapping("/api/supplying")
 public class SupplyingController {
     private final SupplyingService supplyingService;
 
@@ -22,7 +22,7 @@ public class SupplyingController {
     }
 
 
-    @PostMapping("/creat")
+    @PostMapping()
     public ResponseEntity<SupplyingCreatDTO> creatNewSupplying(@RequestBody SupplyingRequestDTO supplyingRequestDTO){
         SupplyingCreatDTO supplyingCreatDTO = supplyingRequestDTO.supplyingCreatDTO();
         List<SupplyingAndOrderProductDTO> supplyingProductDTOS = supplyingRequestDTO.supplyingProductDTOS();
@@ -36,7 +36,7 @@ public class SupplyingController {
     }
 
 
-    @GetMapping("/")
+    @GetMapping()
 
     public ResponseEntity<List<SupplyingFindDTO>> findAll(){
         return  new ResponseEntity<>(supplyingService.findAll(),HttpStatus.OK);
