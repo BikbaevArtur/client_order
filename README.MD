@@ -6,21 +6,44 @@
 
 ### Supplying
 
+Creat new supplying
+POST 
 [*****/api/supplying**](/api/supplying)
 
 ```json
 {
   "supplyingCreatDTO": {
-    "supplyingCompanyID": 2
+    "supplyingCompanyID":  (int id supplying_company) 
   },
   "supplyingProductDTOS": [
     {
-      "productID": 1,
-      "quantity": 4
-    },
-    {
-      "productID": 2,
-      "quantity": 5
+      "productID": (int id product)
+      "quantity": (int quantity)
     }
-  ]
+]
 }
+
+```
+
+Find all supplying
+GET
+[*****/api/supplying**](/api/supplying)
+
+return :
+
+```json
+
+[
+  {
+    "id": 0,
+    "supplyingCompanyID": 0,
+    "deliveryDate": "2024-07-11",
+    "deliveryAmount": 0,
+    "productDTOS": [
+      {
+        "productID": 0,
+        "quantity": 0
+      }
+    ]
+  }
+]
