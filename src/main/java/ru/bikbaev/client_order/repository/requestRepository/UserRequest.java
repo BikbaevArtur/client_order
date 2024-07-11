@@ -26,7 +26,7 @@ public class UserRequest {
         return jpaUser.save(user);
     }
 
-    public void deleteUser(User user){
-        jpaUser.delete(user);
+    public void deleteUser(int id){
+        jpaUser.deleteById(id);
     }
 }

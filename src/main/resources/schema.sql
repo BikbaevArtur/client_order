@@ -110,3 +110,6 @@ CREATE TABLE IF NOT EXISTS supplying_product (
                                                  FOREIGN KEY (id_supplying) REFERENCES supplying(id_supplying) ON DELETE CASCADE,
                                                  FOREIGN KEY (id_product) REFERENCES products(id_product) ON DELETE CASCADE
 );
+
+
+
