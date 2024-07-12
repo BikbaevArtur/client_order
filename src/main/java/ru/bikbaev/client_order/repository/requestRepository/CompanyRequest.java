@@ -27,7 +27,7 @@ public class CompanyRequest {
         return jpaCompany.save(company);
     }
 
-    public void deleteCompany(Company company){
-        jpaCompany.delete(company);
+    public void deleteCompany(int id){
+        jpaCompany.deleteById(id);
     }
 }
