@@ -1,6 +1,7 @@
 package ru.bikbaev.client_order.model.entity.compositeKey;
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,10 +11,12 @@ import java.util.Objects;
 @NoArgsConstructor
 @Data
 @Embeddable
+@AllArgsConstructor
 public class SupplyingProductId implements Serializable {
 
     private int supplyingId;
     private int productId;
+
 
     @Override
     public boolean equals(Object o) {

@@ -5,6 +5,6 @@ import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductD
 import java.util.List;
 
 public record SupplyingRequestDTO(
-        SupplyingCreatDTO supplyingCreatDTO,
+        SupplyingDTO supplyingCreatDTO,
         List<SupplyingAndOrderProductDTO> supplyingProductDTOS) {
 }

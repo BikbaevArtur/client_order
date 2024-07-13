@@ -291,9 +291,7 @@ public class SaleOrderService {
      * @return the SaleOrderDTO
      */
     private SaleOrderDTO saleOrderConvertToDTO(SaleOrder saleOrder, List<SupplyingAndOrderProductDTO> productDTOList) {
-
         SaleOrderDTO saleOrderDTO = new SaleOrderDTO();
-
         saleOrderDTO.setId(saleOrder.getId());
         saleOrderDTO.setCompanyId(saleOrder.getCompany().getId());
         saleOrderDTO.setDataOrder(saleOrder.getDataOrder());
@@ -302,7 +300,6 @@ public class SaleOrderService {
         saleOrderDTO.setCheckLink(saleOrder.getCheckLink());
         saleOrderDTO.setProductDTOS(productDTOList);
         return saleOrderDTO;
-
     }
 
 

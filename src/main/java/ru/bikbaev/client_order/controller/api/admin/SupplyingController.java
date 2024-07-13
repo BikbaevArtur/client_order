@@ -3,8 +3,7 @@ package ru.bikbaev.client_order.controller.api.admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.supplyingDTO.SupplyingCreatDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.supplyingDTO.SupplyingFindDTO;
+import ru.bikbaev.client_order.model.dto.dtoAdminPanel.supplyingDTO.SupplyingDTO;
 import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
 import ru.bikbaev.client_order.model.dto.dtoAdminPanel.supplyingDTO.SupplyingRequestDTO;
 import ru.bikbaev.client_order.model.entity.Supplying;
@@ -22,25 +21,25 @@ public class SupplyingController {
     }
 
 
-    @PostMapping()
-    public ResponseEntity<SupplyingCreatDTO> creatNewSupplying(@RequestBody SupplyingRequestDTO supplyingRequestDTO){
-        SupplyingCreatDTO supplyingCreatDTO = supplyingRequestDTO.supplyingCreatDTO();
-        List<SupplyingAndOrderProductDTO> supplyingProductDTOS = supplyingRequestDTO.supplyingProductDTOS();
-      return   new ResponseEntity<>(supplyingService.creatNewSupplying(supplyingCreatDTO,supplyingProductDTOS), HttpStatus.CREATED);
+    @GetMapping()
+
+    public ResponseEntity<List<SupplyingDTO>> findAll(){
+        return  new ResponseEntity<>(supplyingService.findAllSupplying(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
 
-    public ResponseEntity<SupplyingFindDTO> findSupplyingByIdSupplying(@PathVariable int id){
+    public ResponseEntity<SupplyingDTO> findSupplyingByIdSupplying(@PathVariable int id){
         return new ResponseEntity<>(supplyingService.findById(id),HttpStatus.OK);
     }
 
-
-    @GetMapping()
-
-    public ResponseEntity<List<SupplyingFindDTO>> findAll(){
-        return  new ResponseEntity<>(supplyingService.findAll(),HttpStatus.OK);
+    @PostMapping()
+    public ResponseEntity<SupplyingDTO> creatNewSupplying(@RequestBody SupplyingRequestDTO supplyingRequestDTO){
+        SupplyingDTO supplyingCreatDTO = supplyingRequestDTO.supplyingCreatDTO();
+        List<SupplyingAndOrderProductDTO> supplyingProductDTOS = supplyingRequestDTO.supplyingProductDTOS();
+      return   new ResponseEntity<>(supplyingService.creatNewSupplying(supplyingCreatDTO,supplyingProductDTOS), HttpStatus.CREATED);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Supplying> deleteSupplying(@PathVariable int id){
