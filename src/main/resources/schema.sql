@@ -20,6 +20,31 @@ CREATE TABLE IF NOT EXISTS users (
                                      FOREIGN KEY (id_type_of_account) REFERENCES type_account(id_type_account)
 );
 
+
+CREATE TABLE IF NOT EXISTS role(
+                                   id_role INT AUTO_INCREMENT PRIMARY KEY,
+                                   role_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+INSERT INTO role (role_name)
+VALUES ('user'), ('admin'), ('moderator');
+
+CREATE TABLE IF NOT EXISTS login (
+
+                                     id_user INT PRIMARY KEY,
+                                     email VARCHAR(50) NOT NULL UNIQUE,
+                                     password VARCHAR(255) NOT NULL,
+                                     id_role INT NOT NULL DEFAULT 1,
+                                     FOREIGN KEY (id_role) REFERENCES role(id_role),
+                                     FOREIGN KEY (id_user) REFERENCES users(id_user)
+
+);
+
+
+
+
+
+
 -- Создание таблицы company
 CREATE TABLE IF NOT EXISTS company (
                                        id_company INT AUTO_INCREMENT PRIMARY KEY,

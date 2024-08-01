@@ -1,7 +1,7 @@
 package ru.bikbaev.client_order.service.admin;
 
 import org.springframework.stereotype.Service;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.ProductDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.ProductDTO;
 import ru.bikbaev.client_order.model.entity.Category;
 import ru.bikbaev.client_order.model.entity.Product;
 import ru.bikbaev.client_order.model.entity.SupplyingCompany;

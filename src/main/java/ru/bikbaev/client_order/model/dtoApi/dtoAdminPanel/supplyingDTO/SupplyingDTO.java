@@ -1,7 +1,7 @@
-package ru.bikbaev.client_order.model.dto.dtoAdminPanel.supplyingDTO;
+package ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.supplyingDTO;
 
 import lombok.Data;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.SupplyingAndOrderProductDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,7 +1,7 @@
 package ru.bikbaev.client_order.service.admin;
 
 import org.springframework.stereotype.Service;
-import ru.bikbaev.client_order.model.dto.CompanyDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.CompanyDTO;
 import ru.bikbaev.client_order.model.entity.Company;
 import ru.bikbaev.client_order.model.entity.User;
 import ru.bikbaev.client_order.repository.requestRepository.CompanyRequest;
@@ -28,6 +28,17 @@ public class CompanyService {
                 ));
         companyDTO.setId(company.getId());
         return companyDTO;
+    }
+
+
+    public List<CompanyDTO> findAllCompanyByUserId(int id){
+        List<Company> companyList = companyRequest.getAllById(id).orElseThrow(
+                ()->new RuntimeException("Company not found"));
+
+        List<CompanyDTO> companyDTOS = new ArrayList<>();
+        companyList.forEach(company -> companyDTOS.add(companyConvertToCompanyDTO(company)));
+        return companyDTOS;
+
     }
 
 

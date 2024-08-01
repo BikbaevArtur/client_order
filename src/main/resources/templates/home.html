@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <style>
+        .company-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .company-box {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .company-box:hover {
+            background-color: #e0e0e0;
+        }
+        .create-company-button {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px #999;
+        }
+        .create-company-button:hover {
+            background-color: #3e8e41;
+        }
+        .create-company-button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body>
+<section>
+    <h2>Компании пользователя</h2>
+    <a href="/company-creat" class="create-company-button">Создать компанию</a>
+    <div class="company-grid">
+        <div th:each="company : ${companies}" class="company-box"
+             th:text="${company.getNameCompany()}"
+             th:attr="onclick='location.href=\'/company/' + ${company.getId()} + '\''"></div>
+    </div>
+</section>
+</body>
+</html>

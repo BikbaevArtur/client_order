@@ -1,4 +1,4 @@
-package ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO;
+package ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO;
 
 import lombok.Getter;
 

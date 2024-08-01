@@ -3,7 +3,7 @@ package ru.bikbaev.client_order.controller.api.admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.bikbaev.client_order.model.dto.CompanyDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.CompanyDTO;
 import ru.bikbaev.client_order.service.admin.CompanyService;
 
 import java.util.List;

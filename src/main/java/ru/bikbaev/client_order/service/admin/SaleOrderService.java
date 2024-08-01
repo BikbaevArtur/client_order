@@ -2,9 +2,9 @@ package ru.bikbaev.client_order.service.admin;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.InvoiceForConfirmationOrderDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.SaleOrderDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.SupplyingAndOrderProductDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO.InvoiceForConfirmationOrderDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO.SaleOrderDTO;
 import ru.bikbaev.client_order.model.entity.*;
 import ru.bikbaev.client_order.model.entity.compositeKey.OrderProductId;
 import ru.bikbaev.client_order.repository.requestRepository.*;
@@ -30,6 +30,13 @@ public class SaleOrderService {
         this.orderProductRequest = orderProductRequest;
         this.companyRequest = companyRequest;
     }
+
+
+
+    public List<SaleOrder> findSaleOrderByCompanyId(int id){
+        return saleOrderRequest.findSaleOrderByCompanyId(id).orElseThrow(()-> new RuntimeException("order not found"));
+    }
+
 
     /**
      * Creates a new sale order and saves it in the database.

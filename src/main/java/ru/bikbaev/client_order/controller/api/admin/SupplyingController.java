@@ -3,9 +3,9 @@ package ru.bikbaev.client_order.controller.api.admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.supplyingDTO.SupplyingDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.supplyingDTO.SupplyingRequestDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.supplyingDTO.SupplyingDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.SupplyingAndOrderProductDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.supplyingDTO.SupplyingRequestDTO;
 import ru.bikbaev.client_order.model.entity.Supplying;
 import ru.bikbaev.client_order.service.admin.SupplyingService;
 

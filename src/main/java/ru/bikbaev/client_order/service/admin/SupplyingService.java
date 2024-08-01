@@ -2,8 +2,8 @@ package ru.bikbaev.client_order.service.admin;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.supplyingDTO.SupplyingDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.SupplyingAndOrderProductDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.supplyingDTO.SupplyingDTO;
 import ru.bikbaev.client_order.model.entity.Product;
 import ru.bikbaev.client_order.model.entity.Supplying;
 import ru.bikbaev.client_order.model.entity.SupplyingCompany;

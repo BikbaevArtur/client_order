@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание новой компании</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Создание новой компании</h1>
+<form action="#" method="post" th:action="@{/company-creat}" th:object="${company}">
+    <label for="nameCompany">Название компании:</label>
+    <input type="text" id="nameCompany" name="nameCompany" th:field="*{nameCompany}" required/>
+    <br/>
+
+    <label for="inn">ИНН:</label>
+    <input type="text" id="inn" name="inn" th:field="*{inn}" required/>
+    <br/>
+
+    <label for="paymentAccountNumbers">Расчетный счет:</label>
+    <input type="text" id="paymentAccountNumbers" name="paymentAccountNumbers" th:field="*{paymentAccountNumbers}" required/>
+    <br/>
+
+    <label for="bikBank">БИК банка:</label>
+    <input type="text" id="bikBank" name="bikBank" th:field="*{bikBank}" required/>
+    <br/>
+
+    <button type="submit">Создать компанию</button>
+</form>
+</body>
+</html>

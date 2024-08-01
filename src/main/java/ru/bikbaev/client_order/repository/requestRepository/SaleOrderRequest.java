@@ -15,6 +15,10 @@ public class SaleOrderRequest {
         this.jpaSaleOrder = jpaSaleOrder;
     }
 
+    public Optional<List<SaleOrder>> findSaleOrderByCompanyId(int id){
+        return jpaSaleOrder.findSaleOrderByCompanyId(id);
+    }
+
     public Optional<SaleOrder> findById(int id){
         return jpaSaleOrder.findById(id);
     }

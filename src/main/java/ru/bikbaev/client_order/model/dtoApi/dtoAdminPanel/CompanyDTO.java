@@ -1,4 +1,4 @@
-package ru.bikbaev.client_order.model.dto;
+package ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

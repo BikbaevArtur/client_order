@@ -5,6 +5,7 @@ import ru.bikbaev.client_order.model.entity.User;
 import ru.bikbaev.client_order.repository.JPA.JPAUser;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRequest {
@@ -16,6 +17,10 @@ public class UserRequest {
 
     public User findById(int id){
         return jpaUser.findById(id).orElseThrow();
+    }
+
+    public Optional<User> findByEmail(String email){
+        return jpaUser.findUserByEmail(email);
     }
 
     public List<User> getAll(){

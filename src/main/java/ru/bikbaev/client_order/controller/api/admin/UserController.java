@@ -3,7 +3,8 @@ package ru.bikbaev.client_order.controller.api.admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.UserUpdateTypeDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoClientPanel.UserCreatDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.UserUpdateTypeDTO;
 import ru.bikbaev.client_order.model.entity.User;
 import ru.bikbaev.client_order.service.admin.UserService;
 
@@ -21,8 +22,8 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User> creatNewUser(@RequestBody User user) {
-        return new ResponseEntity<>(service.creatNewUser(user), HttpStatus.CREATED);
+    public ResponseEntity<User> creatNewUser(@RequestBody UserCreatDTO userCreatDTO) {
+        return new ResponseEntity<>(service.creatNewUser(userCreatDTO), HttpStatus.CREATED);
     }
 
     @GetMapping

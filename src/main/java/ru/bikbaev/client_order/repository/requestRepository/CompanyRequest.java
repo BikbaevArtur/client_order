@@ -23,6 +23,10 @@ public class CompanyRequest {
         return jpaCompany.findAll();
     }
 
+    public Optional<List<Company>> getAllById(int id){
+        return jpaCompany.findAllByUserId(id);
+    }
+
     public Company creatNewCompany(Company company){
         return jpaCompany.save(company);
     }

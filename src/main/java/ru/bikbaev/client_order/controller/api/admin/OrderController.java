@@ -3,11 +3,11 @@ package ru.bikbaev.client_order.controller.api.admin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.InvoiceForConfirmationOrderDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.OrderRequestDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.SaleOrderDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.orderDTO.SaleOrderUpdateStatusDTO;
-import ru.bikbaev.client_order.model.dto.dtoAdminPanel.SupplyingAndOrderProductDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO.InvoiceForConfirmationOrderDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO.OrderRequestDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO.SaleOrderDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO.SaleOrderUpdateStatusDTO;
+import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.SupplyingAndOrderProductDTO;
 import ru.bikbaev.client_order.model.entity.SaleOrder;
 import ru.bikbaev.client_order.service.admin.SaleOrderService;
 
