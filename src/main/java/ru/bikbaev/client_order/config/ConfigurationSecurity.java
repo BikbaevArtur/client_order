@@ -49,7 +49,8 @@ public class ConfigurationSecurity {
                 .authorizeHttpRequests(authorization -> authorization
                         .requestMatchers("/api/***").hasRole("ADMIN")
                         .requestMatchers("/signup").permitAll()
-                        .anyRequest().hasRole("ADMIN"))
+                        .requestMatchers("/home").authenticated()
+                        .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/").permitAll()
                         .defaultSuccessUrl("/home")

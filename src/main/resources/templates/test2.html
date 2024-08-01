@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание нового заказа</title>
+    <style>
+        /* Стили остаются без изменений */
+    </style>
+</head>
+<body>
+<h1>Создание нового заказа</h1>
+<form id="createOrderForm" method="post">
+    <input type="hidden" id="companyId" name="companyId" th:value="${companyId}">
+    <table>
+        <thead>
+        <tr>
+            <th>Выбрать</th>
+            <th>Название продукта</th>
+            <th>Остаток на складе</th>
+            <th>Оптовая цена</th>
+            <th>Количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, iterStat : ${products}">
+            <td>
+                <input type="checkbox" name="order[${iterStat.index}].productID" th:value="${product.id}">
+            </td>
+            <td th:text="${product.nameProduct}"></td>
+            <td th:text="${product.stockBalance}"></td>
+            <td th:text="${product.wholesaleSalePrice}"></td>
+            <td>
+                <input type="number" name="order[${iterStat.index}].quantity" min="1">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="submit">Создать заказ</button>
+</form>
+
+<script>
+    document.getElementById('createOrderForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Предотвращаем стандартное отправление формы
+
+        // Очищаем старый массив заказов
+        let orderList = [];
+
+        // Получаем все строки таблицы
+        let rows = document.querySelectorAll('tbody tr');
+
+        rows.forEach(row => {
+            // Проверяем, отмечен ли чекбокс
+            let checkbox = row.querySelector('input[type="checkbox"]');
+            if (checkbox.checked) {
+                // Извлекаем ID продукта
+                let productId = checkbox.value;
+
+                // Получаем количество
+                let quantityInput = row.querySelector('input[type="number"]');
+                let quantity = parseInt(quantityInput.value, 10);
+
+                // Проверяем, что количество валидное
+                if (!isNaN(quantity) && quantity > 0) {
+                    // Создаем новый объект Order
+                    let order = {
+                        productId: productId,
+                        quantity: quantity
+                    };
+
+                    // Добавляем объект в массив
+                    orderList.push(order);
+                }
+            }
+        });
+
+        console.log(orderList); // Выводим массив заказов в консоль
+
+        // Отправка данных на сервер
+        fetch(document.getElementById('createOrderForm').action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderList)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                // Здесь можно добавить логику для обработки успешного ответа от сервера
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Здесь можно добавить логику для обработки ошибок
+            });
+    });
+</script>
+</body>
+</html>

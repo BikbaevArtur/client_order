@@ -36,9 +36,8 @@ public class ProductService {
 
     public ProductDTO creatNewProduct(ProductDTO productDTO) {
         Product product = productDTOMappedByProduct(productDTO);
-        Product temp =  productRequest.creatNewProduct(product);
-        product.setId(temp.getId());
-        return productMappedByProductDTO(temp);
+        product =  productRequest.creatNewProduct(product);
+        return productMappedByProductDTO(product);
     }
 
     public void deleteProduct(int id) {
@@ -48,7 +47,7 @@ public class ProductService {
     }
 
 
-    private ProductDTO productMappedByProductDTO(Product product) {
+    public ProductDTO productMappedByProductDTO(Product product) {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(product.getId());
         productDTO.setNameProduct(product.getNameProduct());

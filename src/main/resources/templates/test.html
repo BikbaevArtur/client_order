@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание нового заказа</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+            min-width: 400px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+        table th, table td {
+            padding: 12px 15px;
+        }
+        table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+        table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+        table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+    </style>
+</head>
+<body>
+<h1>Создание нового заказа</h1>
+<form id="createOrderForm" method="post" onsubmit="submitOrder(event)">
+    <input type="hidden" id="companyId" name="companyId" th:value="${companyId}">
+    <table>
+        <thead>
+        <tr>
+            <th>Выбрать</th>
+            <th>Название продукта</th>
+            <th>Остаток на складе</th>
+            <th>Оптовая цена</th>
+            <th>Количество</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, iterStat : ${products}">
+            <td>
+                <input type="checkbox" name="order[${iterStat.index}].productID" th:value="${product.id}">
+            </td>
+            <td th:text="${product.nameProduct}"></td>
+            <td th:text="${product.stockBalance}"></td>
+            <td th:text="${product.wholesaleSalePrice}"></td>
+            <td>
+                <input type="number" name="order[${iterStat.index}].quantity" min="1">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="submit">Создать заказ</button>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var currentUrl = window.location.href;
+        var companyId = currentUrl.split('/')[4]; // Предполагается, что ID компании находится на 5-й позиции в URL
+        document.getElementById('companyId').value = companyId;
+
+        var form = document.getElementById('createOrderForm');
+        form.action = `/company/${companyId}/create-order`;
+    });
+
+    function submitOrder(event) {
+        event.preventDefault();
+
+        const products = document.querySelectorAll('input[type="checkbox"]:checked');
+        const orderList = [];
+
+        products.forEach((product, index) => {
+            const productId = product.value;
+            const quantityInput = document.querySelector(`input[name="order[${index}].quantity"]`);
+            const quantity = parseInt(quantityInput.value, 10);
+
+            if (quantityInput && quantity > 0) {
+                orderList.push({
+                    productID: productId,
+                    quantity: quantity
+                });
+            }
+        });
+
+        console.log(orderList);
+
+        // Convert orderList to JSON and send it to the server
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", document.getElementById('createOrderForm').action, true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(orderList));
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Handle success
+                console.log("Order created successfully");
+                // Redirect or update the page as needed
+                window.location.href = `/company/${document.getElementById('companyId').value}`;
+            } else {
+                // Handle error
+                console.error("Error creating order");
+            }
+    }
+    }
+</script>
+</body>
+</html>

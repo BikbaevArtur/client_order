@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Order</title>
+</head>
+<body>
+<h1>Create New Order</h1>
+<form th:action="@{/company/{id}/create-order(id=${idCompany})}" th:object="${products}" method="post">
+
+
+
+    <table>
+        <thead>
+        <tr>
+            <th>Выбрать</th>
+            <th>Название продукта</th>
+            <th>Остаток на складе</th>
+            <th>Оптовая цена</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, iterStat : ${products}">
+            <td>
+                <label>
+                    <input type="checkbox" th:name="selectedProducts" th:value="${product.id}" />
+                </label>
+            </td>
+            <td th:text="${product.nameProduct}"></td>
+            <td th:text="${product.stockBalance}"></td>
+            <td th:text="${product.wholesaleSalePrice}"></td>
+            <td>
+                <label>
+                    <input type="number" th:name="'quantities[' + ${product.id} + ']'" min="0" />
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="submit" >создать заказ</button>
+</form>
+</body>
+</html>
+
+
+
+
+
+
