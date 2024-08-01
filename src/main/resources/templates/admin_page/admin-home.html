@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>admin panel</title>
+    <link rel="stylesheet"  href="/css_style/style.css">
+</head>
+<body>
+<div><a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout" >выход</a>
+</div>
+<div>
+    <a class="create-order-button">Пользователи </a>
+    <a class="create-order-button">Компании</a>
+</div>
+
+<h2>Новые заявки</h2>
+<table>
+    <thead>
+        <th>ID</th>
+        <th>Компания</th>
+        <th>Дата заявки</th>
+        <th>Сумма заявки</th>
+        <th>Статус заявки</th>
+    </thead>
+    <tbody>
+        <tr th:each="order, iterStat : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.company.nameCompany}"></td>
+            <td th:text="${order.dataOrder}"></td>
+            <td th:text="${order.amountOrder}"></td>
+            <td th:text="${order.statusOrder.status}"></td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <a class="create-order-button">Все заявки</a>
+</div>
+
+
+
+<h2>Критический остаток товара</h2>
+
+<table >
+    <thead>
+    <th>Id</th>
+    <th>Наименование</th>
+    <th>Остаток на складе</th>
+    <th>Цена закупки</th>
+    <th>Поставщик</th>
+    </thead>
+    <tbody>
+    <tr th:each="product,iterStat : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.nameProduct}"></td>
+        <td th:text="${product.stockBalance}"></td>
+        <td th:text="${product.purchasePrice}"></td>
+        <td th:text="${product.supplyingCompany.nameSupplyingCompany}"></td>
+
+    </tr>
+    </tbody>
+</table>
+<div>
+    <a class="create-order-button" href="/admin/stock">Мой склад</a>
+</div>
+
+</body>
+</html>

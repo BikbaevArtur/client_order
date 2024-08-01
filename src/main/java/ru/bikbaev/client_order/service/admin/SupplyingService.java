@@ -132,6 +132,13 @@ public class SupplyingService {
 
     }
 
+
+    public List<Supplying> findAllOriginSupplying(){
+        return supplyingRequest.getAll();
+    }
+
+
+
     /**
      * Creates a Supplying entity from a SupplyingDTO.
      *
@@ -174,6 +181,18 @@ public class SupplyingService {
 
             Product product = productRequest.findById(supplyingProductDTO.getProductID()).orElseThrow(
                     () -> new RuntimeException("product not found"));
+
+            int stockBalance = product.getStockBalance() + supplyingProductDTO.getQuantity();
+
+            BigDecimal purchasePrice = product.getPurchasePrice();
+            if(!supplyingProductDTO.getPrice().equals(BigDecimal.ZERO)){
+                purchasePrice = supplyingProductDTO.getPrice();
+            }
+
+            product.setStockBalance(stockBalance);
+            product.setPurchasePrice(purchasePrice);
+
+            product = productRequest.creatNewProduct(product);
 
             SupplyingProductId supplyingProductId = new SupplyingProductId(supplyingID, supplyingProductDTO.getProductID());
 

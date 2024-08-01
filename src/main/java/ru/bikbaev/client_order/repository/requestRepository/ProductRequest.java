@@ -30,4 +30,8 @@ public class ProductRequest {
     public void deleteProduct(Product product){
         jpaProduct.delete(product);
     }
+
+    public List<Product> saveAll(List<Product>products){
+        return jpaProduct.saveAll(products);
+    }
 }

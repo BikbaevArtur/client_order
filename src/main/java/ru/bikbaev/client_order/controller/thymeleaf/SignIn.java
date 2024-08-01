@@ -9,7 +9,7 @@ public class SignIn {
 
     @GetMapping()
     public String signIn() {
-        return "sign-in";
+        return "/sign-in";
     }
 
 }

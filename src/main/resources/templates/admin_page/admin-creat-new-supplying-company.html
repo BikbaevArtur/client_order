@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css_style/style.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <a class="create-order-button" href="/admin/stock">Назад</a>
+</div>
+<form action="#" th:action="@{/admin/supplying-orders/supplying-company/creat}" th:object="${company}" method="post">
+
+    <label for="stockBalance">Наименование</label>
+    <input type="text" th:field="*{nameSupplyingCompany}" id="stockBalance">
+    <br>
+
+    <label for="minimumStockBalance">ИНН</label>
+    <input type="text" th:field="*{innSupplyingCompany}" id="minimumStockBalance">
+    <br>
+    <input class="create-order-button" type="submit" value="Добавить компанию">
+    <br>
+</form>
+
+</body>
+</html>

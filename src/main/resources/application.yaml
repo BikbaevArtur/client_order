@@ -10,11 +10,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: true
+    show-sql: false
 
-
-logging:
-  level:
-    org.springframework.security: trace
+#
+#logging:
+#  level:
+#     org.** : off
+#    org.springframework.security: trace
 
 

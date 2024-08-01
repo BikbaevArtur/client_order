@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Create supplying</title>
+    <link rel="stylesheet" href="/css_style/style.css">
+</head>
+<body>
+<h1>Create New Order</h1>
+<a class="create-order-button" href="/admin/supplying-orders" > Назад </a>
+<a class="create-order-button" href="/admin/home" >На главную страницу</a>
+<form th:action="@{/admin/supplying-orders/supplying-company/new-supplying/{id}(id=${supplyingCompanyId})}"  method="post">
+
+    <table>
+        <thead>
+        <tr>
+            <th>Выбрать</th>
+            <th>Название продукта</th>
+            <th>Остаток на складе</th>
+            <th>Цена предыдущий закупки</th>
+            <th>Цена закупки</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, iterStat : ${products}">
+            <td>
+                <label>
+                    <input type="checkbox" th:name="selectedProducts" th:value="${product.id}" />
+                </label>
+            </td>
+            <td th:text="${product.nameProduct}"></td>
+            <td th:text="${product.stockBalance}"></td>
+            <td th:text="${product.purchasePrice}"></td>
+            <td>
+                <label>
+                    <input type="number" th:name="'purchase[' + ${product.id} + ']'" min="0" />
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="number" th:name="'quantities[' + ${product.id} + ']'" min="0" />
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button class="create-order-button" type="submit" >создать заказ</button>
+</form>
+</body>
+</html>
+
+
+
+
+
+

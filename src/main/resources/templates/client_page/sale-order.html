@@ -36,10 +36,37 @@
             font-weight: bold;
             color: #009879;
         }
+        .create-order-button {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 4px #999;
+        }
+        .create-order-button:hover {
+            background-color: #3e8e41;
+        }
+        .create-order-button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
+        }
     </style>
 </head>
 <body>
 <h1>Заказы компании</h1>
+<!--<a id="create-order-btn" class="create-order-button">Создать заявку</a>-->
+
+<a class="create-order-button" th:href="@{/company/{id}/create-order(id=${idCompany})}"    >Создать заявку</a>
+<a class="create-order-button" href="/home" >На гравную страницу</a>
 <table>
     <thead>
     <tr>
@@ -63,5 +90,14 @@
     </tbody>
 </table>
 
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        var currentUrl = window.location.href;-->
+<!--        var companyId = currentUrl.split('/').pop();-->
+<!--        var createOrderBtn = document.getElementById("create-order-btn");-->
+<!--        createOrderBtn.href = '/company/' + companyId + '/create-order';-->
+<!--    });-->
+<!--</script>-->
 </body>
+
 </html>

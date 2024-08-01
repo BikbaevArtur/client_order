@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>admin stock</title>
+    <link rel="stylesheet" href="/css_style/style.css">
+</head>
+<body>
+<div><a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout">выход</a>
+</div>
+<div>
+    <a class="create-order-button" href="/admin/stock">Назад</a>
+    <a class="create-order-button" href="/admin/home">На главную страницу</a>
+</div>
+<h2>Мой склад</h2>
+
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Поставщик</th>
+    <th>Дата поставки</th>
+    <th>Сумма поставки</th>
+
+    </thead>
+    <tbody>
+    <tr th:each="supplying ,iterStat : ${supplyingOrders}">
+        <td th:text="${supplying.id}"></td>
+        <td th:text="${supplying.supplyingCompany.nameSupplyingCompany}"></td>
+        <td th:text="${supplying.deliveryDate}"></td>
+        <td th:text="${supplying.deliveryAmount}"></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <a class="create-order-button" href="/admin/supplying-orders/supplying-company">Новая поставка</a>
+</div>
+
+</body>
+</html>
+

@@ -1,4 +1,4 @@
-package ru.bikbaev.client_order.controller.thymeleaf;
+package ru.bikbaev.client_order.controller.thymeleaf.client_controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.bikbaev.client_order.mapped.CompanyMapper;
 import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.CompanyDTO;
 import ru.bikbaev.client_order.model.dtoThym.CompanyCreatDTOModel;
-import ru.bikbaev.client_order.model.entity.Company;
 import ru.bikbaev.client_order.model.entity.User;
 import ru.bikbaev.client_order.service.admin.CompanyService;
 import ru.bikbaev.client_order.service.admin.UserService;
@@ -32,7 +31,7 @@ public class CompanyModelController {
     @GetMapping("/company-creat")
     public String creatCompanyGet(Model model){
         model.addAttribute("company", new CompanyCreatDTOModel());
-        return "creat-user-company";
+        return "client_page/creat-user-company";
     }
 
     @PostMapping("/company-creat")

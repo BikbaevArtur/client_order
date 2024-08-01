@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Price</title>
+    <link rel="stylesheet" href="/css_style/style.css">
+</head>
+<body>
+<a class="create-order-button" href="/home">На главную страницу</a>
+<h2>Прайс лист</h2></hw>
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Наименование</th>
+        <th>Остаток на складе</th>
+        <th>Розничная цена</th>
+        <th>Интернет цена</th>
+        <th>Оптовая цена</th>
+    </thead>
+    <tbody>
+        <tr th:each="product,iterStat : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.nameProduct}"></td>
+            <td th:text="${product.stockBalance}"></td>
+            <td th:text="${product.retailSalePrice}"></td>
+            <td th:text="${product.internetSalePrice}"></td>
+            <td th:text="${product.wholesaleSalePrice}"></td>
+
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

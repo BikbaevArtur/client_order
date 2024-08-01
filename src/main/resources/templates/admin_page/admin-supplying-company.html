@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css_style/style.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Компании поставщики</title>
+
+</head>
+<body>
+<div>
+    <a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout">выход</a>
+</div>
+<div>
+    <a class="create-order-button" href="/admin/supplying-orders"> Назад </a>
+    <a class="create-order-button" href="/admin/home">На главную страницу</a>
+</div>
+<section>
+    <h2>Поставщики</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Наименование</th>
+            <th>ИНН</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="company, iterStat : ${supplyingCompanies} ">
+                <td th:text="${company.id}"></td>
+                <td th:text="${company.nameSupplyingCompany}"></td>
+                <td th:text="${company.innSupplyingCompany}"></td>
+                <td>
+                    <a class="create-order-button" th:href="@{/admin/supplying-orders/supplying-company/new-supplying/{id} (id=${company.id})}">новая поставка</a>
+                </td>
+
+            </tr>
+        </tbody>
+
+
+    </table>
+</section>
+<a class="create-order-button" href="/admin/supplying-orders/supplying-company/creat">Новый поставщик</a>
+</body>
+</html>
