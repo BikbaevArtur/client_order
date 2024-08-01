@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create user</title>
+
+</head>
+<body>
+<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+    <label for="lastName">Ф: </label>
+    <input  type="text" th:field="*{lastName}" id="lastName">
+    <br>
+
+    <label for="firstName">И: </label>
+    <input type="text" th:field="*{firstName}" id="firstName">
+    <br>
+
+    <label for="middleName">О: </label>
+    <input type="text" th:field ="*{middleName}" id="middleName">
+    <br>
+
+    <label for="phone">P: </label>
+    <input type="text" th:field ="*{phone}" id="phone">
+    <br>
+
+    <label for="email">E: </label>
+    <input type="text" th:field ="*{email}" id="email">
+    <br>
+
+    <label for="password">P: </label>
+    <input type="text" th:field ="*{password}" id="password">
+    <br>
+
+    <input type="submit" value="Зарегестрироваться">
+
+</form>
+
+</body>
+</html>

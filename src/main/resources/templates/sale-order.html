@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы компании</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+            min-width: 400px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+        table th, table td {
+            padding: 12px 15px;
+        }
+        table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+        table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+        table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+    </style>
+</head>
+<body>
+<h1>Заказы компании</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID заказа</th>
+        <th>Дата заказа</th>
+        <th>Сумма заказа</th>
+        <th>Статус заказа</th>
+        <th>Ссылка на чек</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.dataOrder}"></td>
+        <td th:text="${order.amountOrder}"></td>
+        <td th:text="${order.statusOrder.getStatus()}"></td>
+        <td>
+            <a th:href="${order.checkLink}" th:text="${order.checkLink}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
