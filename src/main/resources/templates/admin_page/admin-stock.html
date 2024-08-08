@@ -11,7 +11,6 @@
 </div>
 <div>
     <a class="create-order-button" href="/admin/home">Назад</a>
-    <a class="create-order-button" >Редактирование товара</a>
     <a class="create-order-button" href="/admin/stock/inventory">Инвентаризация</a>
 </div>
 <h2>Мой склад</h2>
@@ -28,6 +27,7 @@
     <th>Цена закупки</th>
     <th>Поставщик</th>
     <th>Категория</th>
+    <th></th>
     </thead>
     <tbody>
     <tr th:each="product,iterStat : ${products}">
@@ -41,6 +41,14 @@
         <td th:text="${product.purchasePrice}"></td>
         <td th:text="${product.supplyingCompany.nameSupplyingCompany}"></td>
         <td th:text="${product.category.nameCategory}"></td>
+        <td>
+            <form th:action="@{'/admin/product/update/'+${product.id}}" method="get">
+                <button type="submit">изменить</button>
+            </form>
+            <form th:action="@{'/admin/product/delete/' + ${product.id}}" method="get">
+                <button type="submit">удалить</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
@@ -52,4 +60,6 @@
 
 </body>
 </html>
+
+
 

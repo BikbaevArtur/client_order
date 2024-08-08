@@ -8,6 +8,7 @@ import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.CompanyDTO;
 import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.ProductDTO;
 import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO.SaleOrderDTO;
 import ru.bikbaev.client_order.model.dtoThym.ProductClientDTOModel;
+import ru.bikbaev.client_order.model.entity.Product;
 import ru.bikbaev.client_order.model.entity.SaleOrder;
 import ru.bikbaev.client_order.service.admin.CompanyService;
 import ru.bikbaev.client_order.service.admin.ProductService;
@@ -48,7 +49,8 @@ public class SaleOrderModelController {
 
     @GetMapping("/company/{id}/create-order")
     public String creatNewOrder(Model model, @PathVariable int id) {
-        List<ProductDTO> productDTOS = productService.findAll();
+        List<Product> products = productService.findAll();
+        List<ProductDTO> productDTOS = productMapper.allProductMappedByProductDTO(products);
         List<ProductClientDTOModel> productClientDTOModels = productMapper.convertAllProductsDTOToProdClDToMod(productDTOS);
 
         model.addAttribute("idCompany",id);

@@ -60,3 +60,20 @@ table tbody tr.active-row {
     transform: translateY(2px);
 }
 
+.form-group {
+    margin-bottom: 8px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group select {
+    width: 10%;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+

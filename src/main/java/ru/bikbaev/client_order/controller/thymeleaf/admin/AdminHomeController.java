@@ -26,7 +26,7 @@ public class AdminHomeController {
 
     @GetMapping("/home")
     public String homePage(Model model) {
-        List<Product> product = productService.findAllOriginProduct();
+        List<Product> product = productService.findAll();
         List<SaleOrder> saleOrders = saleOrderService.findAllOriginSaleOrder();
 
         List<Product> productMinStockBalance = productService.filterByMinBalance(product);

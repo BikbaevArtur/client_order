@@ -27,9 +27,10 @@ public class ProductRequest {
         return jpaProduct.save(product);
     }
 
-    public void deleteProduct(Product product){
-        jpaProduct.delete(product);
+    public void deleteProduct(int id){
+        jpaProduct.deleteById(id);
     }
+
 
     public List<Product> saveAll(List<Product>products){
         return jpaProduct.saveAll(products);

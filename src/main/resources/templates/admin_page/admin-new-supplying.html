@@ -6,10 +6,17 @@
     <link rel="stylesheet" href="/css_style/style.css">
 </head>
 <body>
-<h1>Create New Order</h1>
-<a class="create-order-button" href="/admin/supplying-orders" > Назад </a>
-<a class="create-order-button" href="/admin/home" >На главную страницу</a>
-<form th:action="@{/admin/supplying-orders/supplying-company/new-supplying/{id}(id=${supplyingCompanyId})}"  method="post">
+<div>
+    <a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout">выход</a>
+</div>
+<div>
+    <a class="create-order-button" href="/admin/supplying-orders"> Назад </a>
+    <a class="create-order-button" href="/admin/home">На главную страницу</a>
+</div>
+<h2>Новая поставка</h2>
+<form th:action="@{/admin/supplying-orders/supplying-company/new-supplying/{id}(id=${supplyingCompanyId})}"
+      method="post">
 
     <table>
         <thead>
@@ -27,7 +34,7 @@
         <tr th:each="product, iterStat : ${products}">
             <td>
                 <label>
-                    <input type="checkbox" th:name="selectedProducts" th:value="${product.id}" />
+                    <input type="checkbox" th:name="selectedProducts" th:value="${product.id}"/>
                 </label>
             </td>
             <td th:text="${product.nameProduct}"></td>
@@ -35,19 +42,19 @@
             <td th:text="${product.purchasePrice}"></td>
             <td>
                 <label>
-                    <input type="number" th:name="'purchase[' + ${product.id} + ']'" min="0" />
+                    <input type="number" th:name="'purchase[' + ${product.id} + ']'" min="0"/>
                 </label>
             </td>
             <td>
                 <label>
-                    <input type="number" th:name="'quantities[' + ${product.id} + ']'" min="0" />
+                    <input type="number" th:name="'quantities[' + ${product.id} + ']'" min="0"/>
                 </label>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <button class="create-order-button" type="submit" >создать заказ</button>
+    <button class="create-order-button" type="submit">создать заказ</button>
 </form>
 </body>
 </html>

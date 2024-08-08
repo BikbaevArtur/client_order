@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.bikbaev.client_order.mapped.ProductMapper;
 import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.ProductDTO;
 import ru.bikbaev.client_order.model.dtoThym.ProductClientDTOModel;
+import ru.bikbaev.client_order.model.entity.Product;
 import ru.bikbaev.client_order.service.admin.ProductService;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public class ProductModelController {
 
     @GetMapping("/price")
     public String getPrice(Model model) {
-        List<ProductDTO> productDTOS = productService.findAll();
+        List<Product> products = productService.findAll();
+        List<ProductDTO> productDTOS = productMapper.allProductMappedByProductDTO(products);
         List<ProductClientDTOModel> productModelControllers = productMapper.convertAllProductsDTOToProdClDToMod(productDTOS);
         model.addAttribute("products",productModelControllers);
         return "client_page/price";

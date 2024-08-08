@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование продукта</title>
+    <link rel="stylesheet" href="/css_style/style.css">
+</head>
+<body>
+<div>
+    <a class="create-order-button" href="/admin/stock">Назад</a>
+    <a class="create-order-button" href="/admin/home">На главную страницу</a>
+</div>
+
+<form th:action="@{/admin/product/update/{id}(id=${product.id})}" th:object="${product}" method="post">
+    <div class="form-group">
+        <label for="productId">Id:
+            <span id="productId" th:text="${product.id}"></span>
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="nameProduct">Наименование:</label>
+        <input id="nameProduct" type="text" th:field="*{nameProduct}"/>
+    </div>
+    <div class="form-group">
+        <label for="stockBalance">Остаток на складе:</label>
+        <input id="stockBalance" type="number" th:field="*{stockBalance}"/>
+    </div>
+    <div class="form-group">
+        <label for="minimumStockBalance">Минимальный допустимый остаток:</label>
+        <input id="minimumStockBalance" type="number" th:field="*{minimumStockBalance}"/>
+    </div>
+    <div class="form-group">
+        <label for="retailSalePrice">РРЦ:</label>
+        <input id="retailSalePrice" type="text" th:field="*{retailSalePrice}"/>
+    </div>
+    <div class="form-group">
+        <label for="internetSalePrice">Интернет:</label>
+        <input id="internetSalePrice" type="text" th:field="*{internetSalePrice}"/>
+    </div>
+    <div class="form-group">
+        <label for="wholesaleSalePrice">Опт:</label>
+        <input id="wholesaleSalePrice" type="text" th:field="*{wholesaleSalePrice}"/>
+    </div>
+    <div class="form-group">
+        <label for="purchasePrice">Цена закупки:</label>
+        <input id="purchasePrice" type="text" th:field="*{purchasePrice}"/>
+    </div>
+
+    <label for="supplyingCompany">Поставщик</label>
+    <select th:field="*{supplyingCompany.id}" id="supplyingCompany">
+        <option th:each="supplier : ${supplyingCompanies}" th:value="${supplier.id}"
+                th:text="${supplier.nameSupplyingCompany}">Supplier
+        </option>
+    </select>
+    <br>
+
+    <label for="category">Категория</label>
+    <select th:field="*{category.id}" id="category">
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.nameCategory}">
+            Category
+        </option>
+    </select>
+    <br>
+    <div class="form-group">
+        <input class="create-order-button" type="submit" value="Сохранить">
+    </div>
+</form>
+</body>
+</html>

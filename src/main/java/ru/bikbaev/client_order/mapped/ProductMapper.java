@@ -23,7 +23,7 @@ public class ProductMapper {
     private final ProductRequest productRequest;
     private final SupplyingCompanyService supplyingCompanyService;
 
-    public ProductMapper(CategoryService categoryService, ProductService productService, ProductRequest productRequest, SupplyingCompanyService supplyingCompanyService) {
+    public ProductMapper(CategoryService categoryService,  ProductRequest productRequest, SupplyingCompanyService supplyingCompanyService) {
         this.categoryService = categoryService;
         this.productRequest = productRequest;
 
@@ -126,22 +126,20 @@ public class ProductMapper {
     }
 
 
-    public List<ProductDTO> mapperByUpdateProduct(Map<String, String> updateQuantity) {
+    public List<Product> mapperByUpdateProduct(Map<String, String> updateQuantity) {
 
-        List<ProductDTO> productDTOList = new ArrayList<>();
+        List<Product> productDTOList = new ArrayList<>();
         for (Map.Entry<String, String> entry : updateQuantity.entrySet()) {
 
             Product product = productRequest.findById(Integer.parseInt(entry.getKey())).orElseThrow(() -> new RuntimeException("product not found"));
 
 
-            int quantity = product.getStockBalance();
-            if (entry.getValue() != null) {
-                quantity = Integer.parseInt(entry.getValue());
-            }
+            int quantity = Integer.parseInt(entry.getValue());
+
 
             product.setStockBalance(quantity);
 
-            productDTOList.add(productMappedByProductDTO(product));
+            productDTOList.add(product);
         }
         return productDTOList;
     }

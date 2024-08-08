@@ -41,7 +41,7 @@ public class AdminMyStock {
 
     @GetMapping("/stock")
     public String getStock(Model model) {
-        List<Product> products = productService.findAllOriginProduct();
+        List<Product> products = productService.findAll();
         model.addAttribute("products", products);
         return "admin_page/admin-stock";
     }
@@ -58,7 +58,8 @@ public class AdminMyStock {
     }
 
     @PostMapping("/creat-product")
-    public String creatNewProduct(ProductDTO product) {
+    public String creatNewProduct(ProductDTO productDTO) {
+        Product product = productMapper.productDTOMappedByProduct(productDTO);
         productService.creatNewProduct(product);
         return "redirect:/admin/stock";
     }
@@ -82,7 +83,7 @@ public class AdminMyStock {
 
     @GetMapping("/supplying-orders/supplying-company/new-supplying/{id}")
     public String creatNewSupplyingForm(Model model, @PathVariable int id) {
-        List<Product> products = productService.findAllOriginProduct();
+        List<Product> products = productService.findAll();
         List<Product> filterProduct = productService.filterBySupplyingCompany(products, id);
         model.addAttribute("products", filterProduct);
         model.addAttribute("supplyingCompanyId", id);

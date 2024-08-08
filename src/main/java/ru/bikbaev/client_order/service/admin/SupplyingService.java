@@ -30,7 +30,7 @@ public class SupplyingService {
     private final SupplyingCompanyRequest supplyingCompanyRequest;
     private final ProductRequest productRequest;
 
-    public SupplyingService(SupplyingRequest supplyingRequest, SupplyingProductRequest supplyingProductRequest, SupplyingCompanyService supplyingCompanyService, SupplyingCompanyRequest supplyingCompanyRequest, ProductRequest productRequest) {
+    public SupplyingService(SupplyingRequest supplyingRequest, SupplyingProductRequest supplyingProductRequest,  SupplyingCompanyRequest supplyingCompanyRequest, ProductRequest productRequest) {
         this.supplyingRequest = supplyingRequest;
         this.supplyingProductRequest = supplyingProductRequest;
         this.supplyingCompanyRequest = supplyingCompanyRequest;

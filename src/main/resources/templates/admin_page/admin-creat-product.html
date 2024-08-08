@@ -7,7 +7,12 @@
 </head>
 <body>
 <div>
+    <a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout">выход</a>
+</div>
+<div>
     <a class="create-order-button" href="/admin/stock">Назад</a>
+    <a class="create-order-button" href="/admin/home">На главную страницу</a>
 </div>
 <form action="#" th:action="@{/admin/creat-product}" th:object="${product}" method="post">
     <label for="name">Наименование</label>
@@ -40,22 +45,25 @@
 
     <label for="supplyingCompany">Поставщик</label>
     <select th:field="*{supplyingCompanyId}" id="supplyingCompany">
-        <option th:each="supplier : ${supplyingCompany}" th:value="${supplier.id}" th:text="${supplier.nameSupplyingCompany}">Supplier</option>
+        <option th:each="supplier : ${supplyingCompany}" th:value="${supplier.id}"
+                th:text="${supplier.nameSupplyingCompany}">Supplier
+        </option>
     </select>
     <br>
 
     <label for="category">Категория</label>
     <select th:field="*{categoryId}" id="category">
-        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.nameCategory}">Category</option>
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.nameCategory}">
+            Category
+        </option>
     </select>
     <br>
 
 
-
-
     <input class="create-order-button" type="submit" value="Добавить продукт">
-    <br>
 </form>
+<a class="create-order-button" href="/admin/category">Категории</a>
+
 
 </body>
 </html>
