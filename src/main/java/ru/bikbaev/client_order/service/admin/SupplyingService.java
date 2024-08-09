@@ -234,12 +234,7 @@ public class SupplyingService {
     }
 
 
-    /**
-     * написать доку
-     *
-     * @param supplyingProducts
-     * @return
-     */
+
     private List<SupplyingAndOrderProductDTO> getProductDTOS(List<SupplyingProduct> supplyingProducts) {
         List<SupplyingAndOrderProductDTO> supplyingProductDTOList = new ArrayList<>();
 

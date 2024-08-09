@@ -30,7 +30,7 @@ public class AdminMyStock {
     private final ProductMapper productMapper;
 
 
-    public AdminMyStock(ProductService productService, SupplyingCompanyService supplyingCompanyService, CategoryService categoryService, SupplyingService service, SupplyingService supplyingService, ProductMapper productMapper, ProductMapper productMapper1) {
+    public AdminMyStock(ProductService productService, SupplyingCompanyService supplyingCompanyService, CategoryService categoryService, SupplyingService supplyingService, ProductMapper productMapper1) {
         this.productService = productService;
         this.supplyingCompanyService = supplyingCompanyService;
         this.categoryService = categoryService;

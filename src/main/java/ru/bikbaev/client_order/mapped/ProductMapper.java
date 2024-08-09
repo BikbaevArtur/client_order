@@ -9,7 +9,6 @@ import ru.bikbaev.client_order.model.entity.Product;
 import ru.bikbaev.client_order.model.entity.SupplyingCompany;
 import ru.bikbaev.client_order.repository.requestRepository.ProductRequest;
 import ru.bikbaev.client_order.service.admin.CategoryService;
-import ru.bikbaev.client_order.service.admin.ProductService;
 import ru.bikbaev.client_order.service.admin.SupplyingCompanyService;
 
 import java.math.BigDecimal;
