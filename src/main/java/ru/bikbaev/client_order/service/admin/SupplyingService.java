@@ -30,7 +30,7 @@ public class SupplyingService {
     private final SupplyingCompanyRequest supplyingCompanyRequest;
     private final ProductRequest productRequest;
 
-    public SupplyingService(SupplyingRequest supplyingRequest, SupplyingProductRequest supplyingProductRequest, SupplyingCompanyService supplyingCompanyService, SupplyingCompanyRequest supplyingCompanyRequest, ProductRequest productRequest) {
+    public SupplyingService(SupplyingRequest supplyingRequest, SupplyingProductRequest supplyingProductRequest,  SupplyingCompanyRequest supplyingCompanyRequest, ProductRequest productRequest) {
         this.supplyingRequest = supplyingRequest;
         this.supplyingProductRequest = supplyingProductRequest;
         this.supplyingCompanyRequest = supplyingCompanyRequest;
@@ -132,6 +132,13 @@ public class SupplyingService {
 
     }
 
+
+    public List<Supplying> findAllOriginSupplying(){
+        return supplyingRequest.getAll();
+    }
+
+
+
     /**
      * Creates a Supplying entity from a SupplyingDTO.
      *
@@ -175,6 +182,18 @@ public class SupplyingService {
             Product product = productRequest.findById(supplyingProductDTO.getProductID()).orElseThrow(
                     () -> new RuntimeException("product not found"));
 
+            int stockBalance = product.getStockBalance() + supplyingProductDTO.getQuantity();
+
+            BigDecimal purchasePrice = product.getPurchasePrice();
+            if(!supplyingProductDTO.getPrice().equals(BigDecimal.ZERO)){
+                purchasePrice = supplyingProductDTO.getPrice();
+            }
+
+            product.setStockBalance(stockBalance);
+            product.setPurchasePrice(purchasePrice);
+
+            product = productRequest.creatNewProduct(product);
+
             SupplyingProductId supplyingProductId = new SupplyingProductId(supplyingID, supplyingProductDTO.getProductID());
 
             SupplyingProduct supplyingProduct = new SupplyingProduct();
@@ -215,12 +234,7 @@ public class SupplyingService {
     }
 
 
-    /**
-     * написать доку
-     *
-     * @param supplyingProducts
-     * @return
-     */
+
     private List<SupplyingAndOrderProductDTO> getProductDTOS(List<SupplyingProduct> supplyingProducts) {
         List<SupplyingAndOrderProductDTO> supplyingProductDTOList = new ArrayList<>();
 

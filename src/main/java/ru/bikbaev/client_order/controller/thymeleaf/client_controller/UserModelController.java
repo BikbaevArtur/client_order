@@ -1,10 +1,9 @@
-package ru.bikbaev.client_order.controller.thymeleaf;
+package ru.bikbaev.client_order.controller.thymeleaf.client_controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import ru.bikbaev.client_order.mapped.UserMapper;
 import ru.bikbaev.client_order.model.dtoApi.dtoClientPanel.UserCreatDTO;
 import ru.bikbaev.client_order.model.dtoThym.UserRegistrationDTOModel;
@@ -25,7 +24,7 @@ public class UserModelController {
     @GetMapping("/signup")
     public String registration(Model model){
         model.addAttribute("user",new UserRegistrationDTOModel());
-        return "sign-up";
+        return "/sign-up";
     }
 
     @PostMapping("/signup")

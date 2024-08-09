@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Создание новой компании</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css_style/style.css">
 </head>
 <body>
+<a class="create-order-button" href="/home">На главную страницу</a>
 <h1>Создание новой компании</h1>
-<form action="#" method="post" th:action="@{/company-creat}" th:object="${company}">
+<form  class="create-order-button" action="#" method="post" th:action="@{/company-creat}" th:object="${company}">
     <label for="nameCompany">Название компании:</label>
     <input type="text" id="nameCompany" name="nameCompany" th:field="*{nameCompany}" required/>
     <br/>
@@ -17,7 +18,8 @@
     <br/>
 
     <label for="paymentAccountNumbers">Расчетный счет:</label>
-    <input type="text" id="paymentAccountNumbers" name="paymentAccountNumbers" th:field="*{paymentAccountNumbers}" required/>
+    <input type="text" id="paymentAccountNumbers" name="paymentAccountNumbers" th:field="*{paymentAccountNumbers}"
+           required/>
     <br/>
 
     <label for="bikBank">БИК банка:</label>

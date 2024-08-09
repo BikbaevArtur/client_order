@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css_style/style.css">
+    <title>Sale Order</title>
+</head>
+<body>
+<div><a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout">выход</a>
+</div>
+<div>
+    <a class="create-order-button" href="/admin/home">Назад</a>
+</div>
+<h2>Все заявки</h2>
+<table>
+    <thead>
+    <th>ID</th>
+    <th>Компания</th>
+    <th>Дата заявки</th>
+    <th>Сумма заявки</th>
+    <th>Статус заявки</th>
+    </thead>
+    <tbody>
+    <tr th:each="order, iterStat : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.company.nameCompany}"></td>
+        <td th:text="${order.dataOrder}"></td>
+        <td th:text="${order.amountOrder}"></td>
+        <td th:text="${order.statusOrder.status}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

@@ -145,6 +145,16 @@ public class SaleOrderService {
     }
 
 
+    public SaleOrder findOriginSaleOrderById(int id){
+        return saleOrderRequest.findById(id).orElseThrow(
+                () -> new RuntimeException("order not found"));
+    }
+
+    public List<SaleOrder> findAllOriginSaleOrder(){
+        return saleOrderRequest.getAll();
+    }
+
+
     /**
      * Deletes a sale order and its associated order products. If the status of the sale order
      * is either 3(заявка подтверждена) or 4(отгружено), it updates the stock balance of the related products before deleting
@@ -203,6 +213,16 @@ public class SaleOrderService {
         return saleOrderDTOS;
 
     }
+
+
+    public List<SaleOrder> filterNewSaleOrder(List<SaleOrder> saleOrderDTOS){
+        return  saleOrderDTOS
+                .stream()
+                .filter(order->order.getStatusOrder().getId()==1)
+                .toList();
+    }
+
+
 
 
     /**

@@ -63,7 +63,10 @@
 </head>
 <body>
 <h1>Заказы компании</h1>
-<a id="create-order-btn" class="create-order-button">Создать заявку</a>
+<!--<a id="create-order-btn" class="create-order-button">Создать заявку</a>-->
+
+<a class="create-order-button" th:href="@{/company/{id}/create-order(id=${idCompany})}"    >Создать заявку</a>
+<a class="create-order-button" href="/home" >На гравную страницу</a>
 <table>
     <thead>
     <tr>
@@ -86,13 +89,15 @@
     </tr>
     </tbody>
 </table>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var currentUrl = window.location.href;
-        var companyId = currentUrl.split('/').pop();
-        var createOrderBtn = document.getElementById("create-order-btn");
-        createOrderBtn.href = '/company/' + companyId + '/create-order';
-    });
-</script>
+
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        var currentUrl = window.location.href;-->
+<!--        var companyId = currentUrl.split('/').pop();-->
+<!--        var createOrderBtn = document.getElementById("create-order-btn");-->
+<!--        createOrderBtn.href = '/company/' + companyId + '/create-order';-->
+<!--    });-->
+<!--</script>-->
 </body>
+
 </html>

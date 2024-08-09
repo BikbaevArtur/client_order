@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>admin stock</title>
+    <link rel="stylesheet" href="/css_style/style.css">
+</head>
+<body>
+<div><a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout">выход</a>
+</div>
+<div>
+    <a class="create-order-button" href="/admin/home">Назад</a>
+    <a class="create-order-button" href="/admin/stock/inventory">Инвентаризация</a>
+</div>
+<h2>Мой склад</h2>
+
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Наименование</th>
+    <th>Остаток на складе</th>
+    <th>Минимальный допустимый остаток</th>
+    <th>РРЦ</th>
+    <th>Интернет</th>
+    <th>Опт</th>
+    <th>Цена закупки</th>
+    <th>Поставщик</th>
+    <th>Категория</th>
+    <th></th>
+    </thead>
+    <tbody>
+    <tr th:each="product,iterStat : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.nameProduct}"></td>
+        <td th:text="${product.stockBalance}"></td>
+        <td th:text="${product.minimumStockBalance}"></td>
+        <td th:text="${product.retailSalePrice}"></td>
+        <td th:text="${product.internetSalePrice}"></td>
+        <td th:text="${product.wholesaleSalePrice}"></td>
+        <td th:text="${product.purchasePrice}"></td>
+        <td th:text="${product.supplyingCompany.nameSupplyingCompany}"></td>
+        <td th:text="${product.category.nameCategory}"></td>
+        <td>
+            <form th:action="@{'/admin/product/update/'+${product.id}}" method="get">
+                <button type="submit">изменить</button>
+            </form>
+            <form th:action="@{'/admin/product/delete/' + ${product.id}}" method="get">
+                <button type="submit">удалить</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <a class="create-order-button" href="/admin/creat-product">Добавить новый продукт</a>
+    <a class="create-order-button" href="/admin/supplying-orders">Поставки</a>
+
+</div>
+
+</body>
+</html>
+
+
+

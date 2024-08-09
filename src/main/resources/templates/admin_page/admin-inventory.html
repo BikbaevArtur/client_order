@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>admin stock</title>
+    <link rel="stylesheet" href="/css_style/style.css">
+</head>
+<body>
+<div><a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout">выход</a>
+</div>
+<div>
+    <a class="create-order-button" href="/admin/stock">Назад</a>
+    <a class="create-order-button" href="/admin/home">На главную страницу</a>
+</div>
+<h2>Инвентаризация</h2>
+
+<form th:action="@{/admin/stock/inventory}" method="post" th:object="${products}" id="productForm">
+
+    <table>
+        <thead>
+        <th>Id</th>
+        <th>Наименование</th>
+        <th>Остаток на складе</th>
+        <th>Реальный остаток</th>
+        <th>Поставщик</th>
+        <th>Категория</th>
+        </thead>
+        <tbody>
+        <tr th:each="product,iterStat : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.nameProduct}"></td>
+            <td th:text="${product.stockBalance}"></td>
+            <td>
+                <label>
+                    <input type="number" th:name="${product.id}" min="0" class="productInput" />
+                </label>
+            </td>
+            <td th:text="${product.supplyingCompany.nameSupplyingCompany}"></td>
+            <td th:text="${product.category.nameCategory}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="create-order-button" type="submit">Сохранить</button>
+</form>
+
+<script>
+    document.getElementById('productForm').addEventListener('submit', function(event) {
+        // Получаем все элементы с классом "productInput"
+        var inputs = document.querySelectorAll('.productInput');
+        var isValid = true;
+
+        // Проверяем каждое поле
+        inputs.forEach(function(input) {
+            if (input.value === '' || input.value === null) {
+                isValid = false;
+                input.style.borderColor = 'red'; // Подсветка некорректного поля (опционально)
+            }
+        });
+
+        // Если есть хотя бы одно пустое поле, показываем сообщение и предотвращаем отправку формы
+        if (!isValid) {
+            alert('Пожалуйста, заполните все поля.');
+            event.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>

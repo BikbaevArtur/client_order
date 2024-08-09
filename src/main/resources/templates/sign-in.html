@@ -9,10 +9,10 @@
     <div>
         <div>
             <h2>Вход в систему</h2>
-            <form th:action="@{/}" method="post" class="form">
+            <form  th:action="@{/}" method="post" >
                 <div class="inputBox">
-                    <label class="lab" for="username">Имя пользователя</label>
-                    <input class="ic" type="text" id="username" name="username"/>
+                    <label  for="username">Имя пользователя</label>
+                    <input  type="text" id="username" name="username"/>
                 </div>
 
                 <div>
@@ -23,11 +23,12 @@
                 <div>
                     <input  type="submit" value="Войти"/>
                 </div>
+                <div>
+                    <a  th:href="@{/signup}" >Регистрация</a>
+                </div>
             </form>
 
-            <div>
-                <a  th:href="@{/signup}" >Регистрация</a>
-            </div>
+
         </div>
     </div>
 </section>

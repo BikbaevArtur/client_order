@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="/css_style/style.css">
 <head>
     <meta charset="UTF-8">
     <title>Create user</title>
 
 </head>
 <body>
-<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
+<div>
+    <a class="create-order-button" href="/">Назад</a>
+</div>
+
+<form class="create-order-button" action="#" th:action="@{/signup}" th:object="${user}" method="post">
     <label for="lastName">Ф: </label>
     <input  type="text" th:field="*{lastName}" id="lastName">
     <br>

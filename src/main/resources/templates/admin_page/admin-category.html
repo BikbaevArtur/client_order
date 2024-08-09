@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css_style/style.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Category</title>
+</head>
+<body>
+
+<div>
+    <a class="create-order-button">личный кабинет</a>
+    <a class="create-order-button" href="/logout">выход</a>
+</div>
+<div>
+    <a class="create-order-button" href="/admin/creat-product">Назад</a>
+    <a class="create-order-button" href="/admin/home">На главную страницу</a>
+</div>
+
+
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Наименование</th>
+    </thead>
+    <tbody>
+    <tr th:each="category, iterStat : ${categories}">
+        <td th:text="${category.id}"></td>
+        <td th:text="${category.nameCategory}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+
+<form action="#" th:action="@{/admin/category}" th:object="${newCategory}" method="post">
+    <label for="name" >Наименование</label>
+    <input type="text" th:field="${newCategory.nameCategory}" id="name">
+    <button type="submit" class="create-order-button">Добавить</button>
+</form>
+<br>
+
+</body>
+</html>

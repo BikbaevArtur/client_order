@@ -1,4 +1,4 @@
-package ru.bikbaev.client_order.controller.thymeleaf;
+package ru.bikbaev.client_order.controller.thymeleaf.client_controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.CompanyDTO;
-import ru.bikbaev.client_order.model.entity.Company;
 import ru.bikbaev.client_order.model.entity.User;
 import ru.bikbaev.client_order.service.admin.CompanyService;
 import ru.bikbaev.client_order.service.admin.UserService;
@@ -31,8 +30,8 @@ public class HomeController {
     public String homePage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         User user = userService.findByEmail(userDetails.getUsername());
         List<CompanyDTO> companyDTOS = companyService.findAllCompanyByUserId(user.getId());
-        model.addAttribute("companies",companyDTOS);
-        return "home";
+        model.addAttribute("companies", companyDTOS);
+        return "client_page/home";
     }
 
 

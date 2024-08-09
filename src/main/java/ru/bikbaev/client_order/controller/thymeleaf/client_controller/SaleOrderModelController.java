@@ -1,4 +1,4 @@
-package ru.bikbaev.client_order.controller.thymeleaf;
+package ru.bikbaev.client_order.controller.thymeleaf.client_controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.bikbaev.client_order.mapped.ProductMapper;
 import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.CompanyDTO;
 import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.ProductDTO;
-import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.SupplyingAndOrderProductDTO;
 import ru.bikbaev.client_order.model.dtoApi.dtoAdminPanel.orderDTO.SaleOrderDTO;
 import ru.bikbaev.client_order.model.dtoThym.ProductClientDTOModel;
+import ru.bikbaev.client_order.model.entity.Product;
 import ru.bikbaev.client_order.model.entity.SaleOrder;
 import ru.bikbaev.client_order.service.admin.CompanyService;
 import ru.bikbaev.client_order.service.admin.ProductService;
@@ -41,31 +41,25 @@ public class SaleOrderModelController {
         List<SaleOrder> saleOrderList = service.findSaleOrderByCompanyId(company.getId());
 
         model.addAttribute("orders", saleOrderList);
-        return "sale-order";
+        model.addAttribute("idCompany",id);
+        return "client_page/sale-order";
     }
+
 
 
     @GetMapping("/company/{id}/create-order")
     public String creatNewOrder(Model model, @PathVariable int id) {
-        List<ProductDTO> productDTOS = productService.findAll();
+        List<Product> products = productService.findAll();
+        List<ProductDTO> productDTOS = productMapper.allProductMappedByProductDTO(products);
         List<ProductClientDTOModel> productClientDTOModels = productMapper.convertAllProductsDTOToProdClDToMod(productDTOS);
 
         model.addAttribute("idCompany",id);
         model.addAttribute("products", productClientDTOModels);
 
-        return "creat-company-order";
+        return "client_page/creat-company-order";
     }
 
 
-//    @PostMapping("/company/{id}/create-order")
-//    public String creatNewOrder(@PathVariable int id, @ModelAttribute("products") ArrayList<ProductClientDTOModel> order) {
-//
-//        System.out.println(order);
-//        SaleOrderDTO saleOrderDTO = new SaleOrderDTO();
-//        saleOrderDTO.setCompanyId(id);
-////        service.creatNewSaleOrder(saleOrderDTO, order);
-//        return "redirect:/company/"+id;
-//    }
 
     @PostMapping("/company/{id}/create-order")
     public String creatNewOrder(@PathVariable int id,
